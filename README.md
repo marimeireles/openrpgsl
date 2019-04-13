@@ -6,4 +6,4 @@ The idea of this project is to create a tool to RPG masters to control the sound
 
 Here is a picture of the working project:
 
-![rpgsl-example][images/rpgsl-example.png]
+![rpgsl-example][/images/rpgsl-example.png]
