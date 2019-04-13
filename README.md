@@ -1,4 +1,4 @@
-#About it
+## About it
 
 This is an Open RPG - Sound Library for RPG players! This repo is for control reasons only. Feel free to contribute, fork this project and use it wherever you want.
 
