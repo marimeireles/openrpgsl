@@ -54,27 +54,52 @@ void Interface::open()
     }
 }
 
+void Interface::save()
+{
+    printf("🐗\n");
+}
+
+void Interface::load()
+{
+    printf("🦊\n");
+}
+
 void Interface::help()
 {
     QMessageBox::about(this, tr("Help Menu"),
             tr("<b>Categories:</b> The categories in this library are aggrouped"
-               " by the track's album name.<br> <b>Track names</b>: Have the "
-               "same name as the track's name. <br> If you encounter any weird"
-               " error while running this app, drop me a message"
-               "mariana@psychonautgirl.space"));
+                " by the track's album name.<br> <b>Track names</b>: Have the "
+                "same name as the track's name. <br> If you encounter any weird"
+                " error while running this app, drop me a message"
+                "mariana@psychonautgirl.space"));
 }
 
 void Interface::about()
 {
     QMessageBox::about(this, tr("About Menu"),
             tr("This is an Open RPG Sound Library for RPG players! Feel free to"
-               " use this project however you want. Just keep in mind that this"
-               " is under the GNU GPL 3 license!"));
+                " use this project however you want. Just keep in mind that this"
+                " is under the GNU GPL 3 license!"));
 }
 
 void Interface::createActions()
 {
-    helpAct = new QAction(tr("&Interface explanation & contact"), this);
+    openAct = new QAction(tr("&Open track"), this);
+    openAct->setStatusTip(tr("Loads one track into the app"));
+    connect(openAct, &QAction::triggered, this, &Interface::open);
+    openAct->setShortcut(tr("CTRL+O"));
+
+    saveAct = new QAction(tr("&Save"), this);
+    saveAct->setStatusTip(tr("Save current state of the library"));
+    connect(saveAct, &QAction::triggered, this, &Interface::save);
+    saveAct->setShortcut(tr("CTRL+S"));
+
+    loadAct = new QAction(tr("&Load"), this);
+    loadAct->setStatusTip(tr("Loads a previously saved library state"));
+    connect(loadAct, &QAction::triggered, this, &Interface::load);
+    loadAct->setShortcut(tr("CTRL+L"));
+
+    helpAct = new QAction(tr("&Interface explanation and contact"), this);
     helpAct->setStatusTip(tr("Show the application's help box"));
     helpAct->setShortcut(tr("CTRL+H"));
     connect(helpAct, &QAction::triggered, this, &Interface::help);
@@ -86,6 +111,11 @@ void Interface::createActions()
 
 void Interface::createMenus()
 {
+    fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(openAct);
+    fileMenu->addAction(saveAct);
+    fileMenu->addAction(loadAct);
+
     infoMenu = menuBar()->addMenu(tr("&Help"));
     infoMenu->addAction(helpAct);
     infoMenu = menuBar()->addMenu(tr("&About"));
