@@ -1,29 +1,84 @@
-#include <QApplication>
 #include <QWidget>
-#include <QMediaMetaData>
-#include <QMediaService>
 #include <QtWidgets>
 #include <QDialog>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QFrame>
+#include <QLabel>
+#include <QMainWindow>
 
 #include "include/player.h"
 #include "include/mainWindow.h"
 
-Interface::Interface(QWidget *parent) : QWidget(parent) {
+Interface::Interface(QWidget *parent) : QMainWindow(parent) {
+    QWidget *centralWidget = new QWidget;
+    setCentralWidget(centralWidget);
 
     mainLayout = new QVBoxLayout;
     optionsLayout = new QHBoxLayout;
     libLayout = new QHBoxLayout;
 
-    QPushButton *openButton = new QPushButton(tr("Open"), this);
+    QWidget *topFiller = new QWidget;
+    topFiller->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    // infoLabel = new QLabel(tr("<i>Choose a menu option, or right-click to invoke a context menu</i>"));
+    // infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    // infoLabel->setAlignment(Qt::AlignCenter);
+    QWidget *bottomFiller = new QWidget;
+    bottomFiller->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    QVBoxLayout *expandingMenuLayout = new QVBoxLayout;
+    expandingMenuLayout->addWidget(topFiller);
+    topFiller->setStyleSheet("background-color: red;");
+    // expandingMenuLayout->addWidget(infoLabel);
+    expandingMenuLayout->addWidget(bottomFiller);
+
+    // QMenuBar *menuBar = new QMenuBar;
+
+    createActions();
+    createMenus();
+
+
+
+    // QString message = tr("A context menu is available by right-clicking");
+    // statusBar()->showMessage(message);
+
+    QPushButton *openButton = new QPushButton(tr("Open"));
     optionsLayout->addWidget(openButton);
 
     connect(openButton, &QPushButton::clicked, this, &Interface::open);
 
+    mainLayout->addLayout(expandingMenuLayout);
     mainLayout->addLayout(optionsLayout);
     mainLayout->addLayout(libLayout);
-    setLayout(mainLayout);
+    centralWidget->setLayout(mainLayout);
+}
+
+#ifndef QT_NO_CONTEXTMENU
+void Interface::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu(this);
+    menu.exec(event->globalPos());
+}
+#endif
+
+void Interface::about()
+{
+    QMessageBox::about(this, tr("About Menu"),
+            tr("This is an Open RPG Sound Library for RPG players! Feel free to"
+               " use this project however you want. Just keep in mind that this"
+               " is under the GNU GPL 3 license!"));
+}
+
+void Interface::createActions()
+{
+    aboutAct = new QAction(tr("&About Openrpgsl"), this);
+    aboutAct->setStatusTip(tr("Show the application's About box"));
+    connect(aboutAct, &QAction::triggered, this, &Interface::about);
+}
+
+void Interface::createMenus()
+{
+    infoMenu = menuBar()->addMenu(tr("&About"));
+    infoMenu->addAction(aboutAct);
 }
 
 void Interface::open()

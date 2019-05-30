@@ -1,9 +1,12 @@
 TEMPLATE = app
-TARGET = opennrpgsl
+TARGET = openrpgsl
 INCLUDEPATH += \bin
 QT += gui widgets
 DESTDIR=bin
 MOC_DIR=bin
+OBJECTS_DIR=bin
+
+CONFIG += qt debug
 
 QT += network \
       xml \
@@ -19,6 +22,3 @@ SOURCES = program/main.cpp \
     src/player.cpp \
     src/playerControls.cpp \
     src/mainWindow.cpp
-
-target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/player
-INSTALLS += target

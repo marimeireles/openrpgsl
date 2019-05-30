@@ -2,8 +2,8 @@
 #include <QWidget>
 #include <vector>
 
-#include "include\mainWindow.h"
-#include "include\player.h"
+#include "include/mainWindow.h"
+#include "include/player.h"
 
 using namespace std;
 
