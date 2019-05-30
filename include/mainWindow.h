@@ -34,6 +34,7 @@ private:
     void save();
     void load();
     void about();
+    void help();
     void createActions();
     void createMenus();
 

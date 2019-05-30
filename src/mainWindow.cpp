@@ -39,27 +39,6 @@ void Interface::contextMenuEvent(QContextMenuEvent *event)
 }
 #endif
 
-void Interface::about()
-{
-    QMessageBox::about(this, tr("About Menu"),
-            tr("This is an Open RPG Sound Library for RPG players! Feel free to"
-               " use this project however you want. Just keep in mind that this"
-               " is under the GNU GPL 3 license!"));
-}
-
-void Interface::createActions()
-{
-    aboutAct = new QAction(tr("&About Openrpgsl"), this);
-    aboutAct->setStatusTip(tr("Show the application's About box"));
-    connect(aboutAct, &QAction::triggered, this, &Interface::about);
-}
-
-void Interface::createMenus()
-{
-    infoMenu = menuBar()->addMenu(tr("&About"));
-    infoMenu->addAction(aboutAct);
-}
-
 void Interface::open()
 {
     QFileDialog fileDialog(this);
@@ -74,6 +53,45 @@ void Interface::open()
             players.back()->setMedia(url);
     }
 }
+
+void Interface::help()
+{
+    QMessageBox::about(this, tr("Help Menu"),
+            tr("<b>Categories:</b> The categories in this library are aggrouped"
+               " by the track's album name.<br> <b>Track names</b>: Have the "
+               "same name as the track's name. <br> If you encounter any weird"
+               " error while running this app, drop me a message"
+               "mariana@psychonautgirl.space"));
+}
+
+void Interface::about()
+{
+    QMessageBox::about(this, tr("About Menu"),
+            tr("This is an Open RPG Sound Library for RPG players! Feel free to"
+               " use this project however you want. Just keep in mind that this"
+               " is under the GNU GPL 3 license!"));
+}
+
+void Interface::createActions()
+{
+    helpAct = new QAction(tr("&Interface explanation & contact"), this);
+    helpAct->setStatusTip(tr("Show the application's help box"));
+    helpAct->setShortcut(tr("CTRL+H"));
+    connect(helpAct, &QAction::triggered, this, &Interface::help);
+
+    aboutAct = new QAction(tr("&About"), this);
+    aboutAct->setStatusTip(tr("Show the application's About box"));
+    connect(aboutAct, &QAction::triggered, this, &Interface::about);
+}
+
+void Interface::createMenus()
+{
+    infoMenu = menuBar()->addMenu(tr("&Help"));
+    infoMenu->addAction(helpAct);
+    infoMenu = menuBar()->addMenu(tr("&About"));
+    infoMenu->addAction(aboutAct);
+}
+
 
 void Interface::createPlayer()
 {
