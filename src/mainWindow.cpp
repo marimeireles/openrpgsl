@@ -3,15 +3,12 @@
 #include <QMediaMetaData>
 #include <QMediaService>
 #include <QtWidgets>
-#include <QGridLayout>
-#include <QGroupBox> 
 #include <QDialog>
 #include <QHBoxLayout>
 #include <QFrame>
 
-
-#include "player.h"
-#include "mainWindow.h"
+#include "include/player.h"
+#include "include/mainWindow.h"
 
 Interface::Interface(QWidget *parent) : QWidget(parent) {
 
@@ -23,7 +20,6 @@ Interface::Interface(QWidget *parent) : QWidget(parent) {
     optionsLayout->addWidget(openButton);
 
     connect(openButton, &QPushButton::clicked, this, &Interface::open);
-    // albumLayout = new QVBoxLayout;
 
     mainLayout->addLayout(optionsLayout);
     mainLayout->addLayout(libLayout);
@@ -82,7 +78,6 @@ void Interface::createAlbumLayout(QString albumName)
     labelAlbumName->setText(albumName);
     labelAlbumName->setAlignment(Qt::AlignTop);
     labelAlbumName->setFixedHeight(20);
-    // labelAlbumName->setStyleSheet("background-color:green");
     albumLayout->addWidget(labelAlbumName);
     albumLayout->addLayout(albumTracksLayout);
     albumLayout->addStretch();
@@ -117,7 +112,6 @@ void Interface::addTrackToAlbumLayout(QString albumName, QString trackName, Play
     //adds track name to layout
     QLabel *labelTrackName = new QLabel();
     labelTrackName->setText(trackName);
-    // labelTrackName->setAlignment(Qt::AlignTop);
     trackTitleLayout->addWidget(labelTrackName);
 
     playerControlsLayout->addWidget(player);

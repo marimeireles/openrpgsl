@@ -12,13 +12,13 @@ QT += network \
       widgets
 
 HEADERS = \
-    include\player.h \
-    include\playerControls.h \
-    include\mainWindow.h
-SOURCES = program\main.cpp \
-    src\player.cpp \
-    src\playerControls.cpp \
-    src\mainWindow.cpp
+    include/player.h \
+    include/playerControls.h \
+    include/mainWindow.h
+SOURCES = program/main.cpp \
+    src/player.cpp \
+    src/playerControls.cpp \
+    src/mainWindow.cpp
 
 target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/player
 INSTALLS += target

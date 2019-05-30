@@ -4,8 +4,8 @@
 #include <QSlider>
 #include <QString>
 
-#include "player.h"
-#include "playerControls.h"
+#include "include/player.h"
+#include "include/playerControls.h"
 
 using namespace std;
 

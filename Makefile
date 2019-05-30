@@ -52,7 +52,7 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main.cpp \
+SOURCES       = program/main.cpp \
 		src/player.cpp \
 		src/playerControls.cpp \
 		src/mainWindow.cpp bin/moc_player.cpp \
@@ -238,7 +238,7 @@ DIST          = ../../Applications/Qt/5.12.1/clang_64/mkspecs/features/spec_pre.
 		../../Applications/Qt/5.12.1/clang_64/mkspecs/features/lex.prf \
 		openrpgsl.pro include/player.h \
 		include/playerControls.h \
-		include/mainWindow.h main.cpp \
+		include/mainWindow.h program/main.cpp \
 		src/player.cpp \
 		src/playerControls.cpp \
 		src/mainWindow.cpp
@@ -654,7 +654,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Applications/Qt/5.12.1/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents include/player.h include/playerControls.h include/mainWindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp src/player.cpp src/playerControls.cpp src/mainWindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents program/main.cpp src/player.cpp src/playerControls.cpp src/mainWindow.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1012,11 +1012,152 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
-main.o: main.cpp ../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+main.o: program/main.cpp ../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		include/mainWindow.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		include/player.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QMediaMetaData \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qmediametadata.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QMediaService \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qmediaservice.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QtWidgets \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtwidgetsglobal.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qabstractbutton.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qabstractitemdelegate.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qabstractitemview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qabstractscrollarea.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qabstractslider.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qabstractspinbox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qaccessiblewidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qaction.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qactiongroup.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qbuttongroup.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcalendarwidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcolormap.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcolumnview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcombobox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcommandlinkbutton.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcommonstyle.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcompleter.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdatawidgetmapper.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdesktopwidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdial.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdialogbuttonbox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdirmodel.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qdrawutil.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qerrormessage.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qfileiconprovider.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qfocusframe.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qfontcombobox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qfontdialog.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qformlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgesture.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgesturerecognizer.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsanchorlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicseffect.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsgridlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitemanimation.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicslayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicslayoutitem.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicslinearlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsproxywidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicssceneevent.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicstransform.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicswidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qheaderview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qinputdialog.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qitemdelegate.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qitemeditorfactory.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qkeyeventtransition.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qkeysequenceedit.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlayoutitem.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlistview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlistwidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmdiarea.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmdisubwindow.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmenu.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmenubar.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmouseeventtransition.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qopenglwidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qprogressbar.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qprogressdialog.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qproxystyle.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qradiobutton.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qrubberband.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qscrollarea.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qscrollbar.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qscroller.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qscrollerproperties.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qshortcut.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qsizegrip.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qsizepolicy.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qspinbox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qsplashscreen.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qsplitter.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstackedlayout.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstackedwidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstatusbar.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstyle.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstyleditemdelegate.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstylefactory.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstyleoption.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstylepainter.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstyleplugin.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qsystemtrayicon.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtabbar.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtableview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtablewidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtabwidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtextbrowser.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtoolbar.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtoolbox.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtoolbutton.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtooltip.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtreeview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtreewidget.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtreewidgetitemiterator.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qundogroup.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qundostack.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qundoview.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwhatsthis.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwizard.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtwidgetsversion.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QSlider
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o program/main.cpp
 
 player.o: src/player.cpp ../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QMediaMetaData \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qmediametadata.h \
@@ -1153,7 +1294,12 @@ player.o: src/player.cpp ../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtwidgetsversion.h \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QSlider \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtCore.framework/Headers/QString \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtCore.framework/Headers/qstring.h
+		../../Applications/Qt/5.12.1/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		include/player.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		include/playerControls.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o src/player.cpp
 
 playerControls.o: src/playerControls.cpp ../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QBoxLayout \
@@ -1164,10 +1310,13 @@ playerControls.o: src/playerControls.cpp ../../Applications/Qt/5.12.1/clang_64/l
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qstyle.h \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QToolButton \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtoolbutton.h \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QComboBox \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qcombobox.h \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QAudio \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qaudio.h
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qaudio.h \
+		include/playerControls.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o playerControls.o src/playerControls.cpp
 
 mainWindow.o: src/mainWindow.cpp ../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QApplication \
@@ -1305,11 +1454,18 @@ mainWindow.o: src/mainWindow.cpp ../../Applications/Qt/5.12.1/clang_64/lib/QtWid
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qwizard.h \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qtwidgetsversion.h \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QGridLayout \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QHBoxLayout \
-		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QFrame
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QFrame \
+		include/player.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/QMediaPlayer \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtMultimedia.framework/Headers/qmediaplayer.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtCore.framework/Headers/QString \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		include/mainWindow.h \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../Applications/Qt/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QLabel
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainWindow.o src/mainWindow.cpp
 
 moc_player.o: bin/moc_player.cpp 

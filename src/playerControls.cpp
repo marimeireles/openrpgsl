@@ -2,10 +2,9 @@
 #include <QSlider>
 #include <QStyle>
 #include <QToolButton>
-#include <QComboBox>
 #include <QAudio>
 
-#include "playerControls.h"
+#include "include/playerControls.h"
 
 PlayerControls::PlayerControls(QWidget *parent) : QWidget(parent)
 {
