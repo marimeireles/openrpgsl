@@ -1,8 +1,12 @@
 ## About it
 
-This is an Open RPG - Sound Library for RPG players! This repo is for control reasons only. Feel free to contribute, fork this project and use it wherever you want.
+This is an Open RPG Sound Library for RPG players! This repo is for version control reasons only. Feel free to contribute, fork this project and use it however you want. But keep in mind that this is under the GNU GPL 3 license!
 
-The idea of this project is to create a tool to RPG masters to control the soundtrack of their adventures in an easy way. If you want to get it touch with me to get a working version of this software feel free to get in touch by email, but keep in mind that the software is still being developed!
+The idea of this project is to create a tool to RPG masters to control the soundtrack of their adventures in an easy way.
+
+Any contribution to this project would be very much appreciated.
+
+If you're not a developer and you want to use this program that's still under development send me an email and I'll help you to get a running version of this in your computer! :)
 
 Here is a picture of the working project:
 
