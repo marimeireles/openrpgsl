@@ -1,5 +1,4 @@
 #include <QApplication>
-#include <QWidget>
 #include <vector>
 
 #include "include/mainWindow.h"

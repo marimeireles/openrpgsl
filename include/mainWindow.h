@@ -2,8 +2,6 @@
 #include <vector>
 #include <map>
 #include <QString>
-#include <QDialog>
-#include <QContextMenuEvent>
 
 #include "player.h"
 
@@ -20,13 +18,9 @@ public:
     void createPlayer();
     void createLib(Player *player);
     void createAlbumLayout(QString albumName);
-    void addTrackToAlbumLayout(QString albumName, QString trackName, Player *player);
+    void addTrackToAlbumLayout(QString albumName, QString trackName,
+                               Player *player);
     bool isAlbumAdded(QString albumName);
-
-protected:
-#ifndef QT_NO_CONTEXTMENU
-    void contextMenuEvent(QContextMenuEvent *event) override;
-#endif
 
 private:
     /*menu*/

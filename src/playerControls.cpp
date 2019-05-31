@@ -11,23 +11,27 @@ PlayerControls::PlayerControls(QWidget *parent) : QWidget(parent)
     m_playButton = new QToolButton(this);
     m_playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
 
-    connect(m_playButton, &QAbstractButton::clicked, this, &PlayerControls::playClicked);
+    connect(m_playButton, &QAbstractButton::clicked, this,
+            &PlayerControls::playClicked);
 
     m_stopButton = new QToolButton(this);
     m_stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     m_stopButton->setEnabled(false);
 
-    connect(m_stopButton, &QAbstractButton::clicked, this, &PlayerControls::stop);
+    connect(m_stopButton, &QAbstractButton::clicked, this,
+            &PlayerControls::stop);
 
     m_muteButton = new QToolButton(this);
     m_muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
 
-    connect(m_muteButton, &QAbstractButton::clicked, this, &PlayerControls::muteClicked);
+    connect(m_muteButton, &QAbstractButton::clicked, this,
+            &PlayerControls::muteClicked);
 
     m_volumeSlider = new QSlider(Qt::Horizontal, this);
     m_volumeSlider->setRange(0, 100);
 
-    connect(m_volumeSlider, &QSlider::valueChanged, this, &PlayerControls::onVolumeSliderValueChanged);
+    connect(m_volumeSlider, &QSlider::valueChanged, this,
+            &PlayerControls::onVolumeSliderValueChanged);
 
     QBoxLayout *layout = new QHBoxLayout;
     layout->setMargin(0);

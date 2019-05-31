@@ -1,6 +1,3 @@
-#include <QMediaMetaData>
-#include <QMediaService>
-#include <QtWidgets>
 #include <QSlider>
 #include <QString>
 
@@ -15,30 +12,41 @@ Player::Player(QWidget *parent) : QWidget(parent)
     m_player->setAudioRole(QAudio::MusicRole);
 
     //emits signal when metadata is ready
-    connect(m_player, QOverload<>::of(&QMediaPlayer::metaDataChanged), this, &Player::metaDataChanged);
+    connect(m_player, QOverload<>::of(&QMediaPlayer::metaDataChanged), this,
+        &Player::metaDataChanged);
 
     //creates slider
     m_slider = new QSlider(Qt::Horizontal);
     m_slider->setRange(0, m_player->duration() / 1000);
     m_labelDuration = new QLabel();
     connect(m_slider, &QSlider::sliderMoved, this, &Player::seek);
-    connect(m_player, &QMediaPlayer::durationChanged, this, &Player::durationChanged);
-    connect(m_player, &QMediaPlayer::positionChanged, this, &Player::positionChanged);
+    connect(m_player, &QMediaPlayer::durationChanged, this,
+            &Player::durationChanged);
+    connect(m_player, &QMediaPlayer::positionChanged, this,
+            &Player::positionChanged);
 
     PlayerControls *controls = new PlayerControls(this);
     controls->setState(m_player->state());
     controls->setVolume(m_player->volume());
     controls->setMuted(controls->isMuted());
 
-    connect(controls, &PlayerControls::play, m_player, &QMediaPlayer::play);
-    connect(controls, &PlayerControls::pause, m_player, &QMediaPlayer::pause);
-    connect(controls, &PlayerControls::stop, m_player, &QMediaPlayer::stop);
-    connect(controls, &PlayerControls::changeVolume, m_player, &QMediaPlayer::setVolume);
-    connect(controls, &PlayerControls::changeMuting, m_player, &QMediaPlayer::setMuted);
+    connect(controls, &PlayerControls::play, m_player,
+            &QMediaPlayer::play);
+    connect(controls, &PlayerControls::pause, m_player,
+            &QMediaPlayer::pause);
+    connect(controls, &PlayerControls::stop, m_player,
+            &QMediaPlayer::stop);
+    connect(controls, &PlayerControls::changeVolume, m_player,
+            &QMediaPlayer::setVolume);
+    connect(controls, &PlayerControls::changeMuting, m_player,
+            &QMediaPlayer::setMuted);
 
-    connect(m_player, &QMediaPlayer::stateChanged, controls, &PlayerControls::setState);
-    connect(m_player, &QMediaPlayer::volumeChanged, controls, &PlayerControls::setVolume);
-    connect(m_player, &QMediaPlayer::mutedChanged, controls, &PlayerControls::setMuted);
+    connect(m_player, &QMediaPlayer::stateChanged, controls,
+            &PlayerControls::setState);
+    connect(m_player, &QMediaPlayer::volumeChanged, controls,
+            &PlayerControls::setVolume);
+    connect(m_player, &QMediaPlayer::mutedChanged, controls,
+            &PlayerControls::setMuted);
 
     QHBoxLayout *controlLayout = new QHBoxLayout;
     controlLayout->setMargin(0);

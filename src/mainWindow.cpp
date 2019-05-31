@@ -1,6 +1,4 @@
 #include <QWidget>
-#include <QtWidgets>
-#include <QDialog>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QFrame>
@@ -15,36 +13,24 @@ Interface::Interface(QWidget *parent) : QMainWindow(parent) {
     setCentralWidget(centralWidget);
 
     mainLayout = new QVBoxLayout;
-    optionsLayout = new QHBoxLayout;
     libLayout = new QHBoxLayout;
 
     createActions();
     createMenus();
-
-    QPushButton *openButton = new QPushButton(tr("Open"));
-    optionsLayout->addWidget(openButton);
-
-    connect(openButton, &QPushButton::clicked, this, &Interface::open);
 
     mainLayout->addLayout(optionsLayout);
     mainLayout->addLayout(libLayout);
     centralWidget->setLayout(mainLayout);
 }
 
-#ifndef QT_NO_CONTEXTMENU
-void Interface::contextMenuEvent(QContextMenuEvent *event)
-{
-    QMenu menu(this);
-    menu.exec(event->globalPos());
-}
-#endif
-
 void Interface::open()
 {
     QFileDialog fileDialog(this);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setWindowTitle(tr("Open Files"));
-    fileDialog.setDirectory(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()));
+    fileDialog.setDirectory(QStandardPaths::standardLocations(
+                            QStandardPaths::MusicLocation).value(0,
+                            QDir::homePath()));
     if (fileDialog.exec() == QDialog::Accepted)
     {
         QList<QUrl> urlList = fileDialog.selectedUrls();
@@ -70,7 +56,7 @@ void Interface::help()
             tr("<b>Categories:</b> The categories in this library are aggrouped"
                 " by the track's album name.<br> <b>Track names</b>: Have the "
                 "same name as the track's name. <br> If you encounter any weird"
-                " error while running this app, drop me a message"
+                " error while running this app, drop me a message at "
                 "mariana@psychonautgirl.space"));
 }
 
@@ -176,7 +162,8 @@ void Interface::createAlbumLayout(QString albumName)
     this->albumInfo[albumName] = this->albumLayouts.size()-1;
 }
 
-void Interface::addTrackToAlbumLayout(QString albumName, QString trackName, Player *player)
+void Interface::addTrackToAlbumLayout(QString albumName, QString trackName,
+                                      Player *player)
 {
     //initializes track's layouts
     QHBoxLayout *individualTrackLayout = new QHBoxLayout;
@@ -207,8 +194,11 @@ void Interface::addTrackToAlbumLayout(QString albumName, QString trackName, Play
 bool Interface::isAlbumAdded(QString albumName)
 {
     auto search = albumInfo.find(albumName);
-    if (search != albumInfo.end()) return true;
-    else return false;
+
+    if (search != albumInfo.end())
+        return true;
+    else
+        return false;
 }
 
 Interface::~Interface()
