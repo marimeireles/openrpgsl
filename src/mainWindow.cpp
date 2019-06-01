@@ -4,6 +4,7 @@
 #include <QFrame>
 #include <QLabel>
 #include <QMainWindow>
+#include <fstream>
 
 #include "include/player.h"
 #include "include/mainWindow.h"
@@ -36,13 +37,21 @@ void Interface::open()
         QList<QUrl> urlList = fileDialog.selectedUrls();
         createPlayer();
         for (auto url : urlList)
+        {
             players.back()->setMedia(url);
+            this->tracksLocations.push_back(url);
+            qInfo() <<  url;
+        }
     }
 }
 
 void Interface::save()
 {
-    printf("🐗\n");
+    QFileDialog dialog(this);
+    dialog.setWindowModality(Qt::WindowModal);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    if (dialog.exec() != QDialog::Accepted)
+        printf("failed\n");
 }
 
 void Interface::load()

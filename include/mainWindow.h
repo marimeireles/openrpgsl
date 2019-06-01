@@ -32,6 +32,7 @@ private:
     void createActions();
     void createMenus();
 
+    /*menu options*/
     QMenu *fileMenu = nullptr;
     QMenu *infoMenu = nullptr;
     QAction *openAct = nullptr;
@@ -40,6 +41,7 @@ private:
     QAction *aboutAct = nullptr;
     QAction *helpAct = nullptr;
     QLabel *infoLabel = nullptr;
+    vector<QUrl> tracksLocations;
 
     /*lib layout*/
     QVBoxLayout *mainLayout = nullptr;
