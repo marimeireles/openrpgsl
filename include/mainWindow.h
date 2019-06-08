@@ -51,4 +51,7 @@ private:
     QVBoxLayout *tracksLayout = nullptr;
     vector<Player*> players;
     map<QString, int> albumInfo;
+    bool interfaceIsEmpty = true;
+
+    QLabel *helpScreen = new QLabel();
 };

@@ -123,4 +123,3 @@ void Player::updateDurationInfo(qint64 currentInfo)
     }
     m_labelDuration->setText(tStr);
 }
-

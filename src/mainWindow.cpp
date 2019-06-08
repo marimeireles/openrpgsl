@@ -19,6 +19,14 @@ Interface::Interface(QWidget *parent) : QMainWindow(parent) {
     createActions();
     createMenus();
 
+
+    helpScreen->setText("Press CTRL + O to open a new track!\n"
+                        "Or press CTRL + L to load a library status.\n"
+                        "You can save a library status using the CTRL + S keys."
+                        "\n"
+                        "For further help access the Help menu on the top bar.\n");
+    helpScreen->setAlignment(Qt::AlignCenter);
+    mainLayout->addWidget(helpScreen);
     mainLayout->addLayout(optionsLayout);
     mainLayout->addLayout(libLayout);
     centralWidget->setLayout(mainLayout);
@@ -39,42 +47,70 @@ void Interface::open()
         for (auto url : urlList)
         {
             players.back()->setMedia(url);
-            this->tracksLocations.push_back(url);
-            qInfo() <<  url;
+            tracksLocations.push_back(url);
         }
     }
 }
 
 void Interface::save()
 {
-    QFileDialog dialog(this);
-    dialog.setWindowModality(Qt::WindowModal);
-    dialog.setAcceptMode(QFileDialog::AcceptSave);
-    if (dialog.exec() != QDialog::Accepted)
-        printf("failed\n");
+    QString fileName = QFileDialog::getSaveFileName(
+                           this,
+                           tr("Save Library Status"), "",
+                           tr("Openrpgsl (*.mari);;All Files (*)")
+                       );
+
+    if (fileName.isEmpty())
+        return;
+    else
+    {
+        QFile file(fileName);
+        if ( file.open(QIODevice::ReadWrite) )
+        {
+            QTextStream stream(&file);
+            stream.setCodec("UTF-8");
+            for (auto track : tracksLocations)
+                stream << track.toString() << endl;
+        }
+        else if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::information(this, tr("Unable to open file"),
+                file.errorString());
+            return;
+        }
+    }
 }
 
 void Interface::load()
 {
-    printf("🦊\n");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                       tr("Openrpgsl (*.mari)"));
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    while (!file.atEnd()) {
+        createPlayer();
+        QByteArray line = file.readLine();
+        QUrl url(QTextCodec::codecForName("UTF-8")->toUnicode(line).trimmed());
+        players.back()->setMedia(url);
+    }
 }
 
 void Interface::help()
 {
     QMessageBox::about(this, tr("Help Menu"),
             tr("<b>Categories:</b> The categories in this library are aggrouped"
-                " by the track's album name.<br> <b>Track names</b>: Have the "
-                "same name as the track's name. <br> If you encounter any weird"
-                " error while running this app, drop me a message at "
-                "mariana@psychonautgirl.space"));
+               " by the track's album name.<br> <b>Track names</b>: Have the "
+               "same name as the track's name. <br> If you encounter any weird"
+               " error while running this app, drop me a message at "
+               "mariana@psychonautgirl.space"));
 }
 
 void Interface::about()
 {
     QMessageBox::about(this, tr("About Menu"),
             tr("This is an Open RPG Sound Library for RPG players! Feel free to"
-                " use this project however you want. Just keep in mind that this"
-                " is under the GNU GPL 3 license!"));
+               " use this project however you want. Just keep in mind that this"
+               " is under the GNU GPL 3 license!"));
 }
 
 void Interface::createActions()
@@ -120,6 +156,7 @@ void Interface::createMenus()
 
 void Interface::createPlayer()
 {
+    helpScreen->setVisible(false);
     Player *player = new Player;
     players.push_back(player);
     connect(player, &Player::metaDataAvailable, this, &Interface::createLib);
@@ -174,6 +211,8 @@ void Interface::createAlbumLayout(QString albumName)
 void Interface::addTrackToAlbumLayout(QString albumName, QString trackName,
                                       Player *player)
 {
+    interfaceIsEmpty = false;
+
     //initializes track's layouts
     QHBoxLayout *individualTrackLayout = new QHBoxLayout;
     QVBoxLayout *trackTitleLayout = new QVBoxLayout;
