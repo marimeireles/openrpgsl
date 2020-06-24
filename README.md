@@ -1,5 +1,7 @@
 ## About it
 
+Like https://syrinscape.com/ but free and offline.
+
 This is an Open RPG Sound Library for RPG players. This repo is for version control only. Feel free to contribute, fork this project and use it however you want. But keep in mind that this is under the GNU GPL 3 license!
 
 The idea of this project is to create a tool to RPG masters to control the soundtrack of their adventures in an easy way.
